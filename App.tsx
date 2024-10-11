@@ -4,19 +4,21 @@ import {
   StyleSheet,
   Text,
   View,
-  NativeModule
+  NativeModules
 } from 'react-native';
 
 function App(): React.JSX.Element {
+
+  const { LoginModule } = NativeModules;
 
   return (
     <SafeAreaView style={styles.root}>
       <View>
         <Text
-          onPress={() => { }}
+          onPress={() => LoginModule.openLoginPage()}
           style={styles.txtBtn}>Open Login Page</Text>
         <Text
-          onPress={() => { }}
+          onPress={() => LoginModule.openSignupPage()}
           style={styles.txtBtn}>Open Signup Page</Text>
       </View>
     </SafeAreaView>
