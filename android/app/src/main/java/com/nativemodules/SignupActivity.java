@@ -40,7 +40,7 @@ public class SignupActivity extends AppCompatActivity {
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
 
-                Log.i(TAG, "btnSignup onClick, username: " + username + "\npassword: " + password + "\nemail: " + email);
+                MyNativeModule.btnSignupClickEvent(username, email, password);
 
             }
         });

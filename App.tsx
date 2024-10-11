@@ -1,15 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
   Text,
   View,
-  NativeModules
+  NativeModules,
+  NativeEventEmitter
 } from 'react-native';
+
+
 
 function App(): React.JSX.Element {
 
   const { LoginModule } = NativeModules;
+  const eventEmitter = new NativeEventEmitter();
+
+  const [loginData, setLoginData] = useState({});
+  const [signupData, setSignupData] = useState({});
+
+  useEffect(() => {
+    eventEmitter.addListener("loginClick", (result) => {
+      console.log("useEffect, login, result: ", result);
+      setLoginData(result);
+    })
+
+    return () => {
+      eventEmitter.removeAllListeners("loginClick");
+    }
+
+  }, [])
+
+  useEffect(() => {
+    eventEmitter.addListener("signupClick", (result) => {
+      console.log("useEffect, signup, result: ", result);
+      setSignupData(result);
+    });
+
+    return () => {
+      eventEmitter.removeAllListeners("signupClick");
+    }
+
+  }, [])
 
   return (
     <SafeAreaView style={styles.root}>
